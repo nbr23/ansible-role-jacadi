@@ -1,0 +1,10 @@
+---
+jacadi_image: nbr23/jacadi:full
+jacadi_container_name: jacadi
+jacadi_port: 8080
+jacadi_user: "1000"
+jacadi_audio_group: "29"
+jacadi_audiodev: "plughw:1,0"
+jacadi_extra_routes_path: ""
+jacadi_extra_audio_path: ""
+jacadi_restart_policy: unless-stopped

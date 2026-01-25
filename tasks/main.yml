@@ -1,0 +1,28 @@
+---
+- name: Deploy jacadi container
+  community.docker.docker_container:
+    name: "{{ jacadi_container_name }}"
+    image: "{{ jacadi_image }}"
+    state: started
+    restart_policy: "{{ jacadi_restart_policy }}"
+    user: "{{ jacadi_user }}:{{ jacadi_audio_group }}"
+    ports:
+      - "{{ jacadi_port }}:8080"
+    devices:
+      - /dev/snd:/dev/snd
+    volumes: >-
+      {{
+        ['/etc/passwd:/etc/passwd:ro', '/etc/group:/etc/group:ro']
+        + ([jacadi_extra_routes_path ~ ':/app/extra_routes.json:ro'] if jacadi_extra_routes_path else [])
+        + ([jacadi_extra_audio_path ~ ':/audio/extra'] if jacadi_extra_audio_path else [])
+      }}
+    env: >-
+      {{
+        {'AUDIODEV': jacadi_audiodev}
+        | combine({'EXTRA_ROUTES_PATH': '/app/extra_routes.json'} if jacadi_extra_routes_path else {})
+      }}
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
