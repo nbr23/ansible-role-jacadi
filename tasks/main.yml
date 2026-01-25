@@ -1,4 +1,9 @@
 ---
+- name: Pull jacadi image
+  community.docker.docker_image:
+    name: "{{ jacadi_image }}"
+    source: pull
+
 - name: Deploy jacadi container
   community.docker.docker_container:
     name: "{{ jacadi_container_name }}"
