@@ -25,5 +25,6 @@ Variables:
 | `jacadi_extra_routes_path` | | Path to extra_routes.json on host |
 | `jacadi_extra_audio_path` | | Path to extra audio directory on host |
 | `jacadi_restart_policy` | `unless-stopped` | Container restart policy |
+| `jacadi_env` | `{}` | Extra container environment variables, e.g. `TTS_PROVIDER`, `TTS_API_KEY` |
 
 Requires the `community.docker` collection.

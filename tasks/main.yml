@@ -25,6 +25,7 @@
       {{
         {'AUDIODEV': jacadi_audiodev}
         | combine({'EXTRA_ROUTES_PATH': '/app/extra_routes.json'} if jacadi_extra_routes_path else {})
+        | combine(jacadi_env)
       }}
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]

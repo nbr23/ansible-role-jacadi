@@ -8,3 +8,4 @@ jacadi_audiodev: "plughw:1,0"
 jacadi_extra_routes_path: ""
 jacadi_extra_audio_path: ""
 jacadi_restart_policy: unless-stopped
+jacadi_env: {}
